@@ -30,7 +30,7 @@ public class Life {
                     }
                 }
             }
-            if (neighbours>4 || neighbours<2) {
+            if (neighbours>3 || neighbours<2) {
                 die.put(p, true);
             }
         }
@@ -58,7 +58,7 @@ public class Life {
 
     public static void main(String[] args) {
         System.out.println("Hello Life!");
-        int countPoints = 500;
+        int countPoints = 1500;
         int maxPos=100;
         var random = new Random();
         Map<Point, Boolean> cells = new HashMap<>();
@@ -66,7 +66,7 @@ public class Life {
             cells.put(new Point(random.nextInt(maxPos), random.nextInt(maxPos)), true);
         }
         Life life = new Life(cells);
-        int generations = 300;
+        int generations = 1000;
         for (int i = 0; i < generations; i++) {
             long startTime = System.nanoTime();
             life.step();
