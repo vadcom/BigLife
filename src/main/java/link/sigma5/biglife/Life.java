@@ -1,12 +1,11 @@
 package link.sigma5.biglife;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Life {
 
     Map<Point, Boolean> cells;
+    Set<Point> remains=new HashSet<>();
 
     public Life(Map<Point, Boolean> cells) {
         this.cells = cells;
@@ -34,12 +33,27 @@ public class Life {
                 die.put(p, true);
             }
         }
-        die.forEach((k,v)->cells.remove(k));
+        die.forEach((k,v)-> {
+            cells.remove(k);
+            remains.add(k);
+        });
         born.forEach((k,v)->cells.put(k, true));
     }
 
     public Map<Point, Boolean> getCells() {
         return cells;
+    }
+
+    public Set<Point> getRemains() {
+        return remains;
+    }
+
+    boolean isAlive(Point p) {
+        return cells.containsKey(p);
+    }
+
+    boolean hasTrails(long x, long y) {
+        return remains.contains(new Point(x,y));
     }
 
     private int getNeighbours(Point p) {
@@ -96,7 +110,7 @@ public class Life {
 
     }
 
-    static class Point {
+    public static class Point {
         long x;
         long y;
 
