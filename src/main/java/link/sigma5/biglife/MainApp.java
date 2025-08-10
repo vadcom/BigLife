@@ -89,9 +89,23 @@ public class MainApp extends Application {
     private Life initLife() {
         int countPoints = initX*initY/5;
         var random = new Random();
-        Map<Life.Point, Boolean> cells = new HashMap<>();
+        Map<Life.Point, Life.Cell> cells = new HashMap<>();
         for (int i = 0; i < countPoints; i++) {
-            cells.put(new Life.Point(random.nextInt(initX), random.nextInt(initY)), true);
+            var r=0.0;
+            var g=0.0;
+            var b=0.0;
+            switch (random.nextInt(3)) {
+                case 0 -> {
+                    r=1.0;
+                }
+                case 1 -> {
+                    g=1.0;
+                }
+                case 2 -> {
+                    b=1.0;
+                }
+            }
+            cells.put(new Life.Point(random.nextInt(initX), random.nextInt(initY)), new Life.Cell(r,g,b));
         }
        return new Life(cells);
     }
@@ -109,11 +123,8 @@ public class MainApp extends Application {
 
 
         life.getCells().forEach((p,v)->{
-            if (v) {
-                g.setFill(Color.WHITE);
-            } else {
-                g.setFill(Color.BLACK);
-            }
+            var color=new Color(v.r,v.g,v.b,1.0);
+            g.setFill(color);
             g.fillRect(p.x*sizeCell+ permanentShiftX +shiftX, p.y*sizeCell+ permanentShiftY +shiftY, sizeCell, sizeCell);
         });
     }
