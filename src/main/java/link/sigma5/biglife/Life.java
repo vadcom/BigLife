@@ -30,30 +30,14 @@ public class Life {
 
 
         public Cell(Cell[] parents){
-
-/*
-            // Dominant parents color
-            this.r=(parents[0].r+parents[1].r+parents[2].r)>=2?1:0;
-            this.g=(parents[0].g+parents[1].g+parents[2].g)>=2?1:0;
-            this.b=(parents[0].b+parents[1].b+parents[2].b)>=2?1:0;
-*/
-
-/*
-            // Medium color from parents
-            this.r=(parents[0].r+parents[1].r+parents[2].r)/3;
-            this.g=(parents[0].g+parents[1].g+parents[2].g)/3;
-            this.b=(parents[0].b+parents[1].b+parents[2].b)/3;
-*/
-
-            // Use genes
+            // Use parent genes to create child genes
             genes[0]=parents[0].getGenes();
             genes[1]=parents[1].getGenes();
             genes[2]=parents[2].getGenes();
-
-            this.r=(genes[0][0]+genes[1][0]+genes[1][0])>=1?1:0;
-            this.g=(genes[0][1]+genes[1][1]+genes[2][1])>=1?1:0;
-            this.b=(genes[0][2]+genes[1][2]+genes[2][2])>=1?1:0;
-
+            // Color of cell is a medium of all genes
+            this.r=(genes[0][0]+genes[1][0]+genes[1][0])/3;
+            this.g=(genes[0][1]+genes[1][1]+genes[2][1])/3;
+            this.b=(genes[0][2]+genes[1][2]+genes[2][2])/3;
         }
 
         public double[] getGenes() {
